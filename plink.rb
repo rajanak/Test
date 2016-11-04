@@ -16,13 +16,11 @@ strurl=options[:website]
 page = Nokogiri::HTML(open(strurl))   
 puts "title:\t"+ page.css('title').text
 ['h1', 'h2', 'h3' , 'h4'].each { |tag| puts tag + ':' + page.css(tag).text }
-l=page.css('a').map do |link| 
-	if (l = link.attr("href")) && !l.empty?
-		URI::join(strurl, l)
-	end
+l = page.css('a').map do |link| 
+	URI::join(strurl, l) if (l = link.attr("href")) && !l.empty?
 end.compact.uniq
-n=l.size
+n = l.size
 puts"extrnallink:"
-puts l.reject{|n| n.to_s.include?strurl}
+puts l.reject{ |n| n.to_s.include?strurl}
 puts"internallink:" 
-puts l.select{|n| n.to_s.include?strurl}
+puts l.select{ |n| n.to_s.include?strurl}
