@@ -18,8 +18,8 @@ puts "title:\t"+ page.css('title').text
 ['h1', 'h2', 'h3' , 'h4'].each { |tag| puts tag + ':' + page.css(tag).text }
 l=page.css('a').map do |link| 
 	if (l = link.attr("href")) && !l.empty?
-      URI::join(strurl, l)
-    end
+		URI::join(strurl, l)
+	end
 end.compact.uniq
 n=l.size
 puts"extrnallink:"
